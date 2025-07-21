@@ -29,21 +29,21 @@
       font-size: 1.2rem;
       margin-bottom: 1rem;
     }
-    .ranking {
+    .finalizadores {
       text-align: left;
       margin-top: 2rem;
     }
-    .ranking h2 {
+    .finalizadores h2 {
       color: #343a40;
       font-size: 1.4rem;
       border-bottom: 2px solid #ccc;
       padding-bottom: 0.5rem;
     }
-    .ranking ul {
+    .finalizadores ul {
       list-style: none;
       padding: 0;
     }
-    .ranking li {
+    .finalizadores li {
       font-size: 1.1rem;
       margin-bottom: 0.4rem;
     }
@@ -66,11 +66,10 @@
   <div class="container">
     <h1>Parabéns, você concluiu o jogo!</h1>
     <p>Você mostrou inteligência, persistência e atenção aos detalhes.</p>
-    <p class="pontuacao" id="pontuacaoFinal">Sua pontuação: ...</p>
 
-    <div class="ranking">
-      <h2>Ranking de finalizadores</h2>
-      <ul id="rankingLista">
+    <div class="finalizadores">
+      <h2>Jogadores que finalizaram:</h2>
+      <ul id="listaFinalizadores">
         <!-- Lista gerada dinamicamente -->
       </ul>
     </div>
@@ -80,28 +79,28 @@
 
   <script>
     const nome = localStorage.getItem("usuario") || "Anônimo";
-    const pontos = parseInt(localStorage.getItem("pontuacao")) || 0;
 
-    // Adiciona jogador atual ao ranking se ainda não estiver
-    const jaRegistrado = ranking.some(entry => entry.nome === nome);
-    if (!jaRegistrado) {
-      ranking.push({ nome });
-      ranking.sort((a, b) => b.pontos - a.pontos); // ordem decrescente
-      localStorage.setItem("rankingFinal", JSON.stringify(ranking));
+    // Recupera lista de finalizadores
+    const finalizadores = JSON.parse(localStorage.getItem("finalizadores")) || [];
+
+    // Adiciona o jogador atual se ainda não estiver
+    if (!finalizadores.includes(nome)) {
+      finalizadores.push(nome);
+      localStorage.setItem("finalizadores", JSON.stringify(finalizadores));
     }
 
-    // Exibe ranking
-    const lista = document.getElementById("rankingLista");
-    ranking.forEach((jogador, index) => {
+    // Exibe a lista
+    const lista = document.getElementById("listaFinalizadores");
+    finalizadores.forEach((jogador, index) => {
       const li = document.createElement("li");
-      li.textContent = `${index + 1}º - ${jogador.nome}: ${jogador.pontos} pontos`;
+      li.textContent = `${index + 1}. ${jogador}`;
       lista.appendChild(li);
     });
 
     function reiniciarJogo() {
-      localStorage.removeItem("pontuacao");
+      localStorage.removeItem("pontuacao"); // se quiser zerar mesmo sem exibir
       localStorage.removeItem("usuario");
-      window.location.href = "pag inicial.html"; // ou o nome da sua página inicial
+      window.location.href = "inicio.html"; // ajuste para sua página inicial
     }
   </script>
 </body>
