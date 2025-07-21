@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enigma 09</title>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    .container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 60%;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    button {
+      margin: 1rem 0.5rem;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .feedback {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Enigma 09</h1>
+    <p>Para onde vou, sempre me acha, e está lá, mesmo sendo algo que não é.</p>
+  
+
+
+
+
+ <input type="text" id="resposta" placeholder="Digite sua resposta" />
+    <br/>
+    <button onclick="verificarResposta()">Verificar</button>
+    <button onclick="mostrarDica()">Dica</button>
+    <p class="feedback" id="feedback"></p>
+
+<button id="botaoProximo" onclick="irParaProximo()" style="display: none;">Próximo Enigma</button>
+
+
+
+
+
+
+
+
+
+
+  <script>
+  const respostaCorreta = "sombra";
+  const proximaPagina = "enigma10.html";
+  const textoDica = "ELA ESTÁ PERSEGUINDO VOCÊ";
+
+  function verificarResposta() {
+    const resposta = document.getElementById("resposta").value.trim().toLowerCase();
+    const feedback = document.getElementById("feedback");
+
+    if (resposta === respostaCorreta) {
+      feedback.textContent = "Correto! Você concluiu este enigma.";
+      feedback.style.color = "green";
+      mostrarBotaoProximo();
+    } else {
+      feedback.textContent = "Resposta incorreta. Tente novamente.";
+      feedback.style.color = "red";
+    }
+  }
+
+  function mostrarDica() {
+    alert("Dica: " + textoDica);
+  }
+
+  function mostrarBotaoProximo() {
+    document.getElementById("botaoProximo").style.display = "inline-block";
+  }
+
+  function irParaProximo() {
+    window.location.href = proximaPagina;
+  }
+</script>

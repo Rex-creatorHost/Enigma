@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Início do Jogo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #121212, #1f1f1f);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1em;
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .tutorial {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Enigma Final</h1>
+  <p>Escolha um nome de jogador:</p>
+  <input type="text" id="nomeJogador" placeholder="Digite seu nome">
+  <br>
+  <button onclick="iniciarJogo()">Começar</button>
+  <button onclick="abrirTutorial()">Tutorial</button>  <div class="tutorial" id="tutorialTexto" style="display:none">
+    <h2>📘 Tutorial</h2>
+    <p>
+      🔍 Resolva cada enigma escrevendo a resposta no campo.<br>
+      💡 Você pode pedir uma dica, quantas quiser<br>
+      📝 Anote as respostas, tudo será útil nos enigmas.<br>
+      🧠 Pense com criatividade e atenção aos detalhes.<br>
+      🎯 Seu objetivo: chegar até o fim.
+    </p>
+  </div>  <script>
+    function iniciarJogo() {
+      const nome = document.getElementById('nomeJogador').value.trim();
+      if (nome === '') {
+        alert('Por favor, digite seu nome.');
+        return;
+      }
+      localStorage.setItem('nomeJogador', nome);
+      localStorage.setItem('pontuacao', 100);
+      window.location.href = 'enigma1.html';
+    }
+
+    function abrirTutorial() {
+      const tutorial = document.getElementById('tutorialTexto');
+      tutorial.style.display = tutorial.style.display === 'none' ? 'block' : 'none';
+    }
+  </script></body>
+</html>

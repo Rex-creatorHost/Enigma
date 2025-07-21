@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fim do Jogo</title>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    .container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #007BFF;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .pontuacao {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #28a745;
+      margin: 1.5rem 0;
+    }
+    .ranking {
+      text-align: left;
+      margin-top: 2rem;
+    }
+    .ranking h2 {
+      color: #343a40;
+      font-size: 1.4rem;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+    }
+    .ranking ul {
+      list-style: none;
+      padding: 0;
+    }
+    .ranking li {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+    button {
+      margin-top: 2rem;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #dc3545;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Parabéns, você concluiu o jogo!</h1>
+    <p>Você mostrou inteligência, persistência e atenção aos detalhes.</p>
+    <p class="pontuacao" id="pontuacaoFinal">Sua pontuação: ...</p>
+
+    <div class="ranking">
+      <h2>Ranking de finalizadores</h2>
+      <ul id="rankingLista">
+        <!-- Lista gerada dinamicamente -->
+      </ul>
+    </div>
+
+    <button onclick="reiniciarJogo()">Jogar novamente</button>
+  </div>
+
+  <script>
+    const nome = localStorage.getItem("usuario") || "Anônimo";
+    const pontos = parseInt(localStorage.getItem("pontuacao")) || 0;
+
+    // Atualiza pontuação na tela
+    document.getElementById("pontuacaoFinal").textContent = `Sua pontuação: ${pontos} pontos`;
+
+    // Recupera ranking do localStorage
+    const ranking = JSON.parse(localStorage.getItem("rankingFinal")) || [];
+
+    // Adiciona jogador atual ao ranking se ainda não estiver
+    const jaRegistrado = ranking.some(entry => entry.nome === nome);
+    if (!jaRegistrado) {
+      ranking.push({ nome, pontos });
+      ranking.sort((a, b) => b.pontos - a.pontos); // ordem decrescente
+      localStorage.setItem("rankingFinal", JSON.stringify(ranking));
+    }
+
+    // Exibe ranking
+    const lista = document.getElementById("rankingLista");
+    ranking.forEach((jogador, index) => {
+      const li = document.createElement("li");
+      li.textContent = `${index + 1}º - ${jogador.nome}: ${jogador.pontos} pontos`;
+      lista.appendChild(li);
+    });
+
+    function reiniciarJogo() {
+      localStorage.removeItem("pontuacao");
+      localStorage.removeItem("usuario");
+      window.location.href = "inicio.html"; // ou o nome da sua página inicial
+    }
+  </script>
+</body>
+</html>

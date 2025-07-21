@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enigma Final</title>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    .container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+    textarea {
+      padding: 10px;
+      width: 80%;
+      height: 100px;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    button {
+      margin: 1rem 0.5rem;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .feedback {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Enigma Final</h1>
+    <p>Escreva por mim, o que você tem em mãos?</p>
+    <p>Respostas anteriores:</p>
+    <ul>
+      <li>Enigma 01: Início</li>
+      <li>Enigma 02: Mulher</li>
+      <li>Enigma 03: Santa Ceia</li>
+      <li>Enigma 04: Unha</li>
+      <li>Enigma 05: Relógio</li>
+      <li>Enigma 06: Pescoço</li>
+      <li>Enigma 07: Reino</li>
+      <li>Enigma 08: Inteligência</li>
+      <li>Enigma 09: Sombra</li>
+      <li>Enigma 10: Escondido</li>
+      <li>Enigma 11: Desconhecido</li>
+      <li>Enigma 12: Vírgula</li>
+      <li>Enigma 13: Céu</li>
+      <li>Enigma 14: Olhos</li>
+      <li>Enigma 15: Natal</li>
+      <li>Enigma 16: Grrr</li>
+      <li>Enigma 17: Roda</li>
+      <li>Enigma 18: Ar</li>
+      <li>Enigma 19: Telhado</li>
+      <li>Enigma 20: Uivar</li>
+      <li>Enigma 21: Loucura</li>
+      <li>Enigma 22: Amor</li>
+      <li>Enigma 23: Tabuleiro de xadrez</li>
+      <li>Enigma 24: Investigar</li>
+      <li>Enigma 25: Oxigênio</li>
+      <li>Enigma 26: Nação</li>
+      <li>Enigma 27: Sol</li>
+    </ul>
+    <textarea id="mensagem" placeholder="Digite sua mensagem"></textarea>
+    <br/>
+    <button onclick="verificarResposta()">Verificar</button>
+    <p class="feedback" id="feedback"></p>
+  </div>
+  
+  <button id="botaoProximo" onclick="irParaProximo()" style="display: none;">Próximo</button>
+
+  <script>
+    function verificarResposta() {
+      const mensagem = document.getElementById("mensagem").value.trim().toLowerCase();
+      const feedback = document.getElementById("feedback");
+
+      if (mensagem === "estou surpreso, parabéns") {
+        feedback.textContent = "Correto! Você concluiu o enigma final.";
+        feedback.style.color = "green";
+        mostrarBotaoProximo();
+      } else {
+        feedback.textContent = "Resposta incorreta. Tente novamente.";
+        feedback.style.color = "red";
+      }
+    }
+
+    function mostrarBotaoProximo() {
+      document.getElementById("botaoProximo").style.display = "inline-block";
+    }
+
+    function irParaProximo() {
+      window.location.href = "Página final.html"; // Certifique-se de que essa página existe
+    }
+  </script>
+</body>
+</html>
