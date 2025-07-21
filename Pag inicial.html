@@ -20,21 +20,20 @@
 <body>
   <h1>Bem-vindo ao Jogo de Enigmas!</h1>
   <p>Digite seu nome para começar:</p>
-  <input type="text" id="nomeJogador" placeholder="Seu nome" />
-  <br/>
-  <button onclick="iniciarJogo()">Começar</button>
+  
 
-  <script>
-    function iniciarJogo() {
-      const nome = document.getElementById("nomeJogador").value.trim();
-      if (nome === "") {
-        alert("Por favor, digite seu nome.");
-        return;
-      }
-      localStorage.setItem("usuario", nome);
-      localStorage.setItem("pontuacao", "100"); // se quiser começar com pontuação
-      window.location.href = "enigma1.html"; // ou a página de início dos enigmas
+
+<input type="text" id="nomeJogador" placeholder="Digite seu nome" />
+<button onclick="comecarJogo()">Começar</button>
+
+<script>
+  function comecarJogo() {
+    const nome = document.getElementById("nomeJogador").value.trim();
+    if (nome !== "") {
+      localStorage.setItem("usuario", nome); // SALVANDO o nome
+      window.location.href = "enigma1.html";
+    } else {
+      alert("Digite um nome para começar o jogo.");
     }
-  </script>
-</body>
-</html>
+  }
+</script>
