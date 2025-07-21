@@ -63,44 +63,21 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Parabéns, você concluiu o jogo!</h1>
-    <p>Você mostrou inteligência, persistência e atenção aos detalhes.</p>
+  <div id="listaJogadores"></div>
 
-    <div class="finalizadores">
-      <h2>Jogadores que finalizaram:</h2>
-      <ul id="listaFinalizadores">
-        <!-- Lista gerada dinamicamente -->
-      </ul>
-    </div>
+<script>
+  const nome = localStorage.getItem("usuario") || "Anônimo";
+  
+  // Recupera lista de jogadores do localStorage
+  const jogadoresSalvos = JSON.parse(localStorage.getItem("jogadoresFinalizaram") || "[]");
 
-    <button onclick="reiniciarJogo()">Jogar novamente</button>
-  </div>
+  // Adiciona o nome atual à lista, se ainda não estiver
+  if (!jogadoresSalvos.includes(nome)) {
+    jogadoresSalvos.push(nome);
+    localStorage.setItem("jogadoresFinalizaram", JSON.stringify(jogadoresSalvos));
+  }
 
-  <script>
-    const nome = localStorage.getItem("usuario") || "Anônimo";
-
-    // Recupera lista de finalizadores
-    const finalizadores = JSON.parse(localStorage.getItem("finalizadores")) || [];
-
-    // Adiciona o jogador atual se ainda não estiver
-    if (!finalizadores.includes(nome)) {
-      finalizadores.push(nome);
-      localStorage.setItem("finalizadores", JSON.stringify(finalizadores));
-    }
-
-    // Exibe a lista
-    const lista = document.getElementById("listaFinalizadores");
-    finalizadores.forEach((jogador, index) => {
-      const li = document.createElement("li");
-      li.textContent = `${index + 1}. ${jogador}`;
-      lista.appendChild(li);
-    });
-
-    function reiniciarJogo() {
-      localStorage.removeItem("pontuacao"); // 
-      localStorage.removeItem("usuario");
-      window.location.href = "Pag inicial.html"; // 
-  </script>
-</body>
-</html>
+  // Mostra os nomes na tela
+  const div = document.getElementById("listaJogadores");
+  div.innerHTML = "<ul>" + jogadoresSalvos.map(j => `<li>${j}</li>`).join("") + "</ul>";
+</script>
