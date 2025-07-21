@@ -29,12 +29,6 @@
       font-size: 1.2rem;
       margin-bottom: 1rem;
     }
-    .pontuacao {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #28a745;
-      margin: 1.5rem 0;
-    }
     .ranking {
       text-align: left;
       margin-top: 2rem;
@@ -88,16 +82,10 @@
     const nome = localStorage.getItem("usuario") || "Anônimo";
     const pontos = parseInt(localStorage.getItem("pontuacao")) || 0;
 
-    // Atualiza pontuação na tela
-    document.getElementById("pontuacaoFinal").textContent = `Sua pontuação: ${pontos} pontos`;
-
-    // Recupera ranking do localStorage
-    const ranking = JSON.parse(localStorage.getItem("rankingFinal")) || [];
-
     // Adiciona jogador atual ao ranking se ainda não estiver
     const jaRegistrado = ranking.some(entry => entry.nome === nome);
     if (!jaRegistrado) {
-      ranking.push({ nome, pontos });
+      ranking.push({ nome });
       ranking.sort((a, b) => b.pontos - a.pontos); // ordem decrescente
       localStorage.setItem("rankingFinal", JSON.stringify(ranking));
     }
@@ -113,7 +101,7 @@
     function reiniciarJogo() {
       localStorage.removeItem("pontuacao");
       localStorage.removeItem("usuario");
-      window.location.href = "inicio.html"; // ou o nome da sua página inicial
+      window.location.href = "pag inicial.html"; // ou o nome da sua página inicial
     }
   </script>
 </body>
